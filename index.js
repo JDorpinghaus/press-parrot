@@ -4,7 +4,7 @@ var request = require('request');
 
 var credentials = require('./credentials');
 var app = express();
-const PORT=4390;
+const PORT=process.env.port || 8080;
 const gameId = '5965397021949952'
 
 //Start server
