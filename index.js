@@ -35,11 +35,11 @@ app.get('/oauth', function(req, res) {
 
 //Get current Diplomacy stats
 app.post('/stats', function(req, res) {
-  url = 'http://www.backstabbr.com/game/' + gameId; 
+  url = 'http://www.backstabbr.com/game/' + gameId;
   res.send("Hit stats endpoint.");
 });
 
 //Check server status
-app.post('/healthz', function(req, res) {
+app.get('/healthz', function(req, res) {
     res.send('Server is here.');
 });
