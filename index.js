@@ -5,6 +5,7 @@ var request = require('request');
 var credentials = require('./credentials');
 var app = express();
 const PORT=4390;
+const gameId = '5965397021949952'
 
 //Start server
 app.listen(PORT, function () {
@@ -34,6 +35,7 @@ app.get('/oauth', function(req, res) {
 
 //Get current Diplomacy stats
 app.post('/stats', function(req, res) {
+  url = 'http://www.backstabbr.com/game/' + gameId; 
   res.send("Hit stats endpoint.");
 });
 
