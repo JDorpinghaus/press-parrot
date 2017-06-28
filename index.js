@@ -5,7 +5,7 @@ var request = require('request');
 var credentials = require('./credentials');
 var app = express();
 const PORT=process.env.port || 8080;
-const gameId = '5965397021949952'
+const gameId = '5965397021949952';
 
 //Start server
 app.listen(PORT, function () {
@@ -14,13 +14,14 @@ app.listen(PORT, function () {
 
 //Request to a /oauth endpoint for handling the logic of the Slack oAuth process
 app.get('/oauth', function(req, res) {
-
+  if (!req.query.code) {
         res.status(500);
         res.send({"Error": "Looks like we're not getting code."});
         console.log("Looks like we're not getting code.");
-    } else {
-            url: 'https://slack.com/api/oauth.access', //URL to hit
-            qs: {code: req.query.code, client_id: credentials.clientId, client_secret: credentials.clientSecret}, //Query string data
+    } else
+      request({
+            url: "https://slack.com/api/oauth.access", //URL to hit
+            qs: {code: req.query.code, client_id: clientId, client_secret: clientSecret}, //Query string data
             method: 'GET', //Specify the method
 
         }, function (error, response, body) {
@@ -30,7 +31,6 @@ app.get('/oauth', function(req, res) {
                 res.json(body);
             }
         })
-    }
 });
 
 //Get current Diplomacy stats
